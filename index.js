@@ -15,8 +15,9 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 // Connect to Mongoose and set connection variable
-mongoose.connect('mongodb://heroku_t55xf3n5:jdv9fb9oj3l4o1o3aoqos5rj31@ds051630.mlab.com:51630/heroku_t55xf3n5/capacitacion', { useNewUrlParser: true });
+mongoose.connect(process.env.MONGODB_URI + '/autos' || 'mongodb://localhost/Multicotizador', { useNewUrlParser: true });
 var db = mongoose.connection;
+
 
 // Added check for DB connection
 if (!db)
@@ -29,7 +30,7 @@ let port = process.env.PORT;
 if (port == null || port == "") {
     port = 8080;
 }
-app.listen(port);
+
 
 
 // Send message for default URL
