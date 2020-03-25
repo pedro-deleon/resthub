@@ -39,7 +39,6 @@ exports.limit = function (req, res) {
 // Handle create auto actions
 exports.new = function (req, res) {
     var auto = new Auto();
-    auto.id = req.body.id ? req.body.id : auto.id;
     auto.marca = req.body.marca;
     auto.submarca = req.body.submarca;
     auto.descripcion = req.body.descripcion;
