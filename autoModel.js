@@ -4,17 +4,24 @@ var mongoose = require('mongoose');
 
 var autoSchema = mongoose.Schema({
     id: {
-        type: Number,
-        required: true
-    }, marca: {
+        type: Number
+    },
+    marca: {
         type: String,
         required: true
     },
     submarca: {
-        type: String, required: true
+        type: String,
+        required: true
     },
-    modelos: { type: Number, required: true },
-    descripcion: { type: String, required: true }
+    modelos: {
+        type: Number,
+        required: true
+    },
+    descripcion: {
+        type: String,
+        required: true
+    }
 });
 
 // Export Auto Model
