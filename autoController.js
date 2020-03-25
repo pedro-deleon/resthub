@@ -32,7 +32,7 @@ exports.limit = function (req, res) {
             message: "Autos retrieved successfully",
             data: autos
         });
-    }, req.params.limitNumber);
+    }, +req.params.limitNumber);
 };
 
 
