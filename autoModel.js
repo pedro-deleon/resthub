@@ -7,20 +7,16 @@ var autoSchema = mongoose.Schema({
         type: Number
     },
     marca: {
-        type: String,
-        required: true
+        type: String
     },
     submarca: {
-        type: String,
-        required: true
+        type: String
     },
     modelos: {
-        type: Number,
-        required: true
+        type: Number
     },
     descripcion: {
-        type: String,
-        required: true
+        type: String
     }
 });
 
