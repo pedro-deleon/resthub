@@ -15,8 +15,26 @@ exports.index = function (req, res) {
             message: "Autos retrieved successfully",
             data: autos
         });
-    }, 30);
+    });
 };
+
+
+exports.limit = function (req, res) {
+    Auto.get(function (err, autos) {
+        if (err) {
+            res.json({
+                status: "error",
+                message: err
+            });
+        }
+        res.json({
+            status: "success",
+            message: "Autos retrieved successfully",
+            data: autos
+        });
+    }, req.param.limitNumber);
+};
+
 
 // Handle create auto actions
 exports.new = function (req, res) {

@@ -26,5 +26,8 @@ router.route('/autos/:auto_id')
     .put(autoController.update)
     .delete(autoController.delete);
 
+router.route('/autos/limit/:limitNumber')
+    .get(autoController.limit);
+
 // Export API routes
 module.exports = router;
