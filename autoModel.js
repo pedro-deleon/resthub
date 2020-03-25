@@ -17,7 +17,11 @@ var autoSchema = mongoose.Schema({
     },
     descripcion: {
         type: String
+    },
+    claveVehicular: {
+        type: String
     }
+
 });
 
 // Export Auto Model

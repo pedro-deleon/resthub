@@ -43,6 +43,7 @@ exports.new = function (req, res) {
     auto.submarca = req.body.submarca;
     auto.descripcion = req.body.descripcion;
     auto.modelos = req.body.modelos;
+    auto.claveVehicular = req.body.claveVehicular;
 
     auto.save(function (err) {
         res.json({
@@ -78,7 +79,7 @@ exports.update = function (req, res) {
         auto.submarca = req.body.submarca;
         auto.descripcion = req.body.descripcion;
         auto.modelos = req.body.modelos;
-
+        auto.claveVehicular = req.body.claveVehicular;
         // save the auto and check for errors
         auto.save(function (err) {
             if (err)
