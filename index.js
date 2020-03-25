@@ -15,7 +15,9 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 // Connect to Mongoose and set connection variable
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/Multicotizador', { useNewUrlParser: true });
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/Multicotizador', {
+    useNewUrlParser: true
+});
 console.log('perro gacho')
 console.log(process.env.MONGODB_URI)
 var db = mongoose.connection;
@@ -33,6 +35,20 @@ if (port == null || port == "") {
     port = 8080;
 }
 
+var allowCrossDomain = function (req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+
+    // intercept OPTIONS method
+    if ('OPTIONS' == req.method) {
+        res.send(200);
+    } else {
+        next();
+    }
+};
+
+app.use(allowCrossDomain);
 
 
 // Send message for default URL
@@ -44,8 +60,3 @@ app.use('/api', apiRoutes);
 app.listen(port, function () {
     console.log("Running RestHub on port " + port);
 });
-
-
-
-
-
