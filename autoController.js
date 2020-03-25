@@ -28,7 +28,10 @@ exports.new = function (req, res) {
     auto.modelos = req.body.modelos;
 
     auto.save(function (err) {
-        res.json({ message: 'New auto created!', data: auto });
+        res.json({
+            message: 'New auto created!',
+            data: auto
+        });
     });
 };
 
@@ -53,10 +56,11 @@ exports.update = function (req, res) {
         if (err)
             res.send(err);
 
-        auto.name = req.body.name ? req.body.name : auto.name;
-        auto.gender = req.body.gender;
-        auto.email = req.body.email;
-        auto.phone = req.body.phone;
+        auto.id = req.body.id ? req.body.id : auto.id;
+        auto.marca = req.body.marca;
+        auto.submarca = req.body.submarca;
+        auto.descripcion = req.body.descripcion;
+        auto.modelos = req.body.modelos;
 
         // save the auto and check for errors
         auto.save(function (err) {
@@ -84,5 +88,3 @@ exports.delete = function (req, res) {
         });
     });
 }
-
-
