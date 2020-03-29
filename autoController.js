@@ -56,53 +56,81 @@ exports.new = function (req, res) {
 
 // Handle view auto info
 exports.view = function (req, res) {
-    Auto.findById(req.params.auto_id, function (err, auto) {
-        if (err)
-            res.send(err);
+    if (req.params.auto_id) {
+        Auto.findById(req.params.auto_id, function (err, auto) {
+            if (err)
+                res.send(err);
 
-        res.json({
-            message: 'Auto details loading...',
-            data: auto
+
+
+            res.json({
+                message: 'Auto details loading...',
+                data: auto
+            });
         });
-    });
+    } else {
+        res.json({
+            message: "El id de parámetro no puede ir vacio"
+        })
+    }
+
 };
 
 
 // Handle update auto info
 exports.update = function (req, res) {
-    Auto.findById(req.params.auto_id, function (err, auto) {
-        if (err)
-            res.send(err);
 
-        auto.id = req.body.id ? req.body.id : auto.id;
-        auto.marca = req.body.marca;
-        auto.submarca = req.body.submarca;
-        auto.descripcion = req.body.descripcion;
-        auto.modelos = req.body.modelos;
-        auto.claveVehicular = req.body.claveVehicular;
-        // save the auto and check for errors
-        auto.save(function (err) {
+    if (req.params.auto_id) {
+        Auto.findById(req.params.auto_id, function (err, auto) {
             if (err)
-                res.json(err);
-            res.json({
-                message: 'Auto Info update',
-                data: auto
+                res.send(err);
+
+            auto.id = req.body.id ? req.body.id : auto.id;
+            auto.marca = req.body.marca;
+            auto.submarca = req.body.submarca;
+            auto.descripcion = req.body.descripcion;
+            auto.modelos = req.body.modelos;
+            auto.claveVehicular = req.body.claveVehicular;
+            // save the auto and check for errors
+            auto.save(function (err) {
+                if (err)
+                    res.json(err);
+                res.json({
+                    message: 'Auto Info update',
+                    data: auto
+                });
             });
         });
-    });
+    } else {
+        res.json({
+            message: "El id de parámetro no puede ir vacio"
+        })
+    }
+
+
+
+
 };
 
 //Handle delete auto
 exports.delete = function (req, res) {
-    Auto.remove({
-        _id: req.params.auto_id
-    }, function (err, auto) {
-        if (err)
-            res.send(err);
 
-        res.json({
-            status: "success",
-            message: 'Auto deleted'
+    if (res.params.auto_id) {
+        Auto.remove({
+            _id: req.params.auto_id
+        }, function (err, auto) {
+            if (err)
+                res.send(err);
+
+            res.json({
+                status: "success",
+                message: 'Auto deleted'
+            });
         });
-    });
+    } else {
+        res.json({
+            message: "El id de parámetro no puede ir vacio"
+        })
+    }
+
 }
