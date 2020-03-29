@@ -56,7 +56,7 @@ exports.new = function (req, res) {
 
 // Handle view auto info
 exports.view = function (req, res) {
-    if (req.params.auto_id) {
+    if (res.params.auto_id === "undefined") {
         Auto.findById(req.params.auto_id, function (err, auto) {
             if (err)
                 res.send(err);
@@ -80,7 +80,7 @@ exports.view = function (req, res) {
 // Handle update auto info
 exports.update = function (req, res) {
 
-    if (req.params.auto_id) {
+    if (res.params.auto_id === "undefined") {
         Auto.findById(req.params.auto_id, function (err, auto) {
             if (err)
                 res.send(err);
@@ -115,7 +115,7 @@ exports.update = function (req, res) {
 //Handle delete auto
 exports.delete = function (req, res) {
 
-    if (res.params.auto_id) {
+    if (res.params.auto_id === "undefined") {
         Auto.remove({
             _id: req.params.auto_id
         }, function (err, auto) {
