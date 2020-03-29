@@ -15,11 +15,9 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 // Connect to Mongoose and set connection variable
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/Multicotizador', {
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://adminautos:cdis123@ds051630.mlab.com:51630/heroku_t55xf3n5', {
     useNewUrlParser: true
 });
-console.log('perro gacho')
-console.log(process.env.MONGODB_URI)
 var db = mongoose.connection;
 
 

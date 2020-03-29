@@ -38,6 +38,7 @@ exports.limit = function (req, res) {
 
 // Handle create auto actions
 exports.new = function (req, res) {
+
     var auto = new Auto();
     auto.marca = req.body.marca;
     auto.submarca = req.body.submarca;
@@ -56,57 +57,54 @@ exports.new = function (req, res) {
 
 // Handle view auto info
 exports.view = function (req, res) {
-    if (res.params.auto_id === "undefined") {
-        Auto.findById(req.params.auto_id, function (err, auto) {
-            if (err)
-                res.send(err);
-
-
-
-            res.json({
-                message: 'Auto details loading...',
-                data: auto
-            });
-        });
-    } else {
+    if (req.params.auto_id === "undefined") {
         res.json({
-            message: "El id de parámetro no puede ir vacio"
+            message: "Debes mandar un id como parámetro"
         })
     }
 
+
+    Auto.findById(req.params.auto_id, function (err, auto) {
+        if (err)
+            res.send(err);
+
+        res.json({
+            message: 'Auto details loading...',
+            data: auto
+        });
+    });
 };
 
 
 // Handle update auto info
 exports.update = function (req, res) {
-
-    if (res.params.auto_id === "undefined") {
-        Auto.findById(req.params.auto_id, function (err, auto) {
-            if (err)
-                res.send(err);
-
-            auto.id = req.body.id ? req.body.id : auto.id;
-            auto.marca = req.body.marca;
-            auto.submarca = req.body.submarca;
-            auto.descripcion = req.body.descripcion;
-            auto.modelos = req.body.modelos;
-            auto.claveVehicular = req.body.claveVehicular;
-            // save the auto and check for errors
-            auto.save(function (err) {
-                if (err)
-                    res.json(err);
-                res.json({
-                    message: 'Auto Info update',
-                    data: auto
-                });
-            });
-        });
-    } else {
+    if (req.params.auto_id === "undefined") {
         res.json({
-            message: "El id de parámetro no puede ir vacio"
+            message: "Debes mandar un id como parámetro"
         })
     }
 
+
+    Auto.findById(req.params.auto_id, function (err, auto) {
+        if (err)
+            res.send(err);
+
+        auto.id = req.body.id ? req.body.id : auto.id;
+        auto.marca = req.body.marca;
+        auto.submarca = req.body.submarca;
+        auto.descripcion = req.body.descripcion;
+        auto.modelos = req.body.modelos;
+        auto.claveVehicular = req.body.claveVehicular;
+        // save the auto and check for errors
+        auto.save(function (err) {
+            if (err)
+                res.json(err);
+            res.json({
+                message: 'Auto Info update',
+                data: auto
+            });
+        });
+    });
 
 
 
@@ -114,23 +112,24 @@ exports.update = function (req, res) {
 
 //Handle delete auto
 exports.delete = function (req, res) {
-
-    if (res.params.auto_id === "undefined") {
-        Auto.remove({
-            _id: req.params.auto_id
-        }, function (err, auto) {
-            if (err)
-                res.send(err);
-
-            res.json({
-                status: "success",
-                message: 'Auto deleted'
-            });
-        });
-    } else {
+    if (req.params.auto_id === "undefined") {
         res.json({
-            message: "El id de parámetro no puede ir vacio"
+            message: "Debes mandar un id como parámetro"
         })
     }
+
+    Auto.remove({
+        _id: req.params.auto_id
+    }, function (err, auto) {
+        if (err)
+            res.send(err);
+
+        res.json({
+            status: "success",
+            message: 'Auto deleted'
+        });
+    });
+
+
 
 }
