@@ -58,78 +58,70 @@ exports.new = function (req, res) {
 // Handle view auto info
 exports.view = function (req, res) {
     if (req.params.auto_id === "undefined") {
-        res.json({
+        res.status(400).json({
             message: "Debes mandar un id como parámetro"
         })
-    }
+    } else {
+        Auto.findById(req.params.auto_id, function (err, auto) {
+            if (err)
+                res.send(err);
 
-
-    Auto.findById(req.params.auto_id, function (err, auto) {
-        if (err)
-            res.send(err);
-
-        res.json({
-            message: 'Auto details loading...',
-            data: auto
+            res.json({
+                message: 'Auto details loading...',
+                data: auto
+            });
         });
-    });
+    }
 };
 
 
 // Handle update auto info
 exports.update = function (req, res) {
     if (req.params.auto_id === "undefined") {
-        res.json({
-            message: "Debes mandar un id como parámetro"
+        res.status(400).json({
+            message: 'Revisa que estas enviando como parámetro el id correctamente'
         })
-    }
-
-
-    Auto.findById(req.params.auto_id, function (err, auto) {
-        if (err)
-            res.send(err);
-
-        auto.id = req.body.id ? req.body.id : auto.id;
-        auto.marca = req.body.marca;
-        auto.submarca = req.body.submarca;
-        auto.descripcion = req.body.descripcion;
-        auto.modelos = req.body.modelos;
-        auto.claveVehicular = req.body.claveVehicular;
-        // save the auto and check for errors
-        auto.save(function (err) {
+    } else {
+        Auto.findById(req.params.auto_id, function (err, auto) {
             if (err)
-                res.json(err);
-            res.json({
-                message: 'Auto Info update',
-                data: auto
+                res.status(400);
+
+            auto.id = req.body.id ? req.body.id : auto.id;
+            auto.marca = req.body.marca;
+            auto.submarca = req.body.submarca;
+            auto.descripcion = req.body.descripcion;
+            auto.modelos = req.body.modelos;
+            auto.claveVehicular = req.body.claveVehicular;
+            // save the auto and check for errors
+            auto.save(function (err) {
+                if (err)
+                    res.json(err);
+                res.json({
+                    message: 'Auto Info update',
+                    data: auto
+                });
             });
         });
-    });
-
-
-
+    }
 };
 
 //Handle delete auto
 exports.delete = function (req, res) {
     if (req.params.auto_id === "undefined") {
-        res.json({
+        res.status(400).json({
             message: "Debes mandar un id como parámetro"
         })
-    }
+    } else {
+        Auto.remove({
+            _id: req.params.auto_id
+        }, function (err, auto) {
+            if (err)
+                res.send(err);
 
-    Auto.remove({
-        _id: req.params.auto_id
-    }, function (err, auto) {
-        if (err)
-            res.send(err);
-
-        res.json({
-            status: "success",
-            message: 'Auto deleted'
+            res.json({
+                status: "success",
+                message: 'Auto deleted'
+            });
         });
-    });
-
-
-
+    }
 }
