@@ -35,16 +35,11 @@ if (port == null || port == "") {
     port = 8080;
 }
 
-app.use(cors());
-
-app.use(allowCrossDomain);
-
-
 // Send message for default URL
 app.get('/', (req, res) => res.send('Hello World with Express'));
 
 // Use Api routes in the App
-app.use('/api', apiRoutes);
+app.use('/api', apiRoutes, cors());
 // Launch app to listen to specified port
 app.listen(port, function () {
     console.log("Running RestHub on port " + port);
