@@ -7,7 +7,7 @@ let mongoose = require('mongoose');
 // Initialise the app
 let app = express();
 
-const cors = require('cors');
+var cors = require('cors')
 
 // Import routes
 let apiRoutes = require("./api-routes");
@@ -15,6 +15,8 @@ let apiRoutes = require("./api-routes");
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+
+app.use(cors());
 app.use(bodyParser.json());
 // Connect to Mongoose and set connection variable
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://adminautos:cdis123@ds051630.mlab.com:51630/heroku_t55xf3n5', {
@@ -39,7 +41,7 @@ if (port == null || port == "") {
 app.get('/', (req, res) => res.send('Hello World with Express'));
 
 // Use Api routes in the App
-app.use('/api', apiRoutes, cors());
+app.use('/api', apiRoutes);
 // Launch app to listen to specified port
 app.listen(port, function () {
     console.log("Running RestHub on port " + port);
