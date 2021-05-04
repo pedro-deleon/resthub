@@ -15,5 +15,5 @@ var autoSchema = mongoose.Schema({
 var Auto = module.exports = mongoose.model('auto', autoSchema)
 
 module.exports.get = function (callback, limit) {
-    Auto.find(callback).limit(limit);
+    Auto.find(callback).limit(200);
 }
