@@ -27,8 +27,7 @@ mongoose.connect(MONGO_URI, {
   auth: {
     user: MONGO_DB_USER,
     password: MONGO_DB_PASSWORD
-  },
-  { useNewUrlParser: true }
+  }
 })
 var db = mongoose.connection;
 
