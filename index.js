@@ -19,9 +19,17 @@ app.use(bodyParser.urlencoded({
 app.use(cors());
 app.use(bodyParser.json());
 // Connect to Mongoose and set connection variable
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://adminautos:cdis123@ds051630.mlab.com:51630/heroku_t55xf3n5', {
-    useNewUrlParser: true
-});
+
+const MONGO_URI = process.env.MONGO_URI;
+const MONGO_DB_USER = process.env.MONGO_DB_USER;
+const MONGO_DB_PASSWORD = process.env.MONGO_DB_PASSWORD;
+mongoose.connect(MONGO_URI, {
+  auth: {
+    user: MONGO_DB_USER,
+    password: MONGO_DB_PASSWORD
+  },
+  { useNewUrlParser: true }
+})
 var db = mongoose.connection;
 
 
