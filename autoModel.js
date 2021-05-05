@@ -12,7 +12,7 @@ var autoSchema = mongoose.Schema({
 
 // Export Auto Model
 
-var Auto = module.exports = mongoose.model('auto', autoSchema)
+var Auto = module.exports = mongoose.model('autos', autoSchema)
 
 module.exports.get = function (callback, limit) {
     Auto.find(callback).limit(200);
