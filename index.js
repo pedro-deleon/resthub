@@ -22,14 +22,7 @@ app.use(bodyParser.json());
 
 // Connect to Mongoose and set connection variable
 const MONGO_URI = process.env.MONGODB_URI;
-const MONGO_DB_USER = process.env.MONGO_DB_USER;
-const MONGO_DB_PASSWORD = process.env.MONGO_DB_PASSWORD;
-mongoose.connect(MONGO_URI, {
-    auth: {
-      user: MONGO_DB_USER,
-      password: MONGO_DB_PASSWORD
-    }
-  })
+mongoose.connect(MONGO_URI)
 var db = mongoose.connection;
 
 
