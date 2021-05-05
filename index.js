@@ -13,8 +13,12 @@ var cors = require('cors')
 let apiRoutes = require("./api-routes");
 // Configure bodyparser to handle post requests
 
-app.use(cors());
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 
+app.use(cors());
+app.use(bodyParser.json());
 
 // Connect to Mongoose and set connection variable
 const MONGO_URI = process.env.MONGODB_URI;
