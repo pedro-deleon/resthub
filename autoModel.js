@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 // Setup schema
 
 var autoSchema = mongoose.Schema({
-    id: String,
+    _id: String,
     marca: String,
     submarca: String,
     descripcion: String,
