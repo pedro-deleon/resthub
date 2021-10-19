@@ -9,12 +9,14 @@ exports.index = function (req, res) {
                 status: "error",
                 message: err
             });
+        } else {
+            res.json({
+                status: "success",
+                message: "Autos retrieved successfully",
+                data: autos
+            });            
         }
-        res.json({
-            status: "success",
-            message: "Autos retrieved successfully",
-            data: autos
-        });
+
     });
 };
 
@@ -26,12 +28,14 @@ exports.limit = function (req, res) {
                 status: "error",
                 message: err
             });
-        }
-        res.json({
+        } else {
+            res.json({
             status: "success",
             message: "Autos retrieved successfully",
             data: autos
-        });
+        });        
+        }
+
     }, +req.params.limitNumber);
 };
 
